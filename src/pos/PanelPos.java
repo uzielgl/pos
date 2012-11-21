@@ -4,6 +4,7 @@
  */
 package pos;
 
+import java.math.BigDecimal;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JDialog;
@@ -18,6 +19,7 @@ import org.jdesktop.beansbinding.AutoBinding;
 import org.jdesktop.swingbinding.JTableBinding;
 import org.jdesktop.swingbinding.SwingBindings;
 import javax.swing.JOptionPane;
+import java.util.Date;
 /**
  *
  * @author Uziel
@@ -36,6 +38,8 @@ public class PanelPos extends javax.swing.JFrame {
         pnlMain.setIconAt(1, ia);
         
         setMode("addNoFocus");
+        
+        
           
     }
     
@@ -96,7 +100,7 @@ public class PanelPos extends javax.swing.JFrame {
         clienteList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : clienteQuery3.getResultList();
         pnlMain = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cmbCliente = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblArticulosVenta = new javax.swing.JTable();
@@ -109,6 +113,8 @@ public class PanelPos extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblVenta = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
+        btnFinalizarVenta = new javax.swing.JButton();
+        txtTotal = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblArticulos = new javax.swing.JTable();
@@ -208,7 +214,7 @@ public class PanelPos extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, jComboBox2);
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, clienteList, cmbCliente);
         bindingGroup.addBinding(jComboBoxBinding);
 
         jLabel2.setText("Cliente");
@@ -305,25 +311,37 @@ public class PanelPos extends javax.swing.JFrame {
 
         jLabel8.setText("Total");
 
+        btnFinalizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pos/images/ok.png"))); // NOI18N
+        btnFinalizarVenta.setText("Finalizar Compra");
+        btnFinalizarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarVentaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cmbCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnFinalizarVenta, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(133, 133, 133))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +349,7 @@ public class PanelPos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -339,8 +357,11 @@ public class PanelPos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(btnFinalizarVenta))
         );
 
         pnlMain.addTab("Ventas [F5]", jPanel1);
@@ -441,6 +462,8 @@ public class PanelPos extends javax.swing.JFrame {
         jLabel4.setText("Descripción");
 
         jLabel5.setText("Precio");
+
+        txtIdArticulo.setEditable(false);
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
@@ -582,13 +605,29 @@ public class PanelPos extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        articuloPorEditar.setNombre(txtNombre.getText());
+        articuloPorEditar.setDescripcion(txtDescripcion.getText());
+        articuloPorEditar.setPrecio(Integer.parseInt(txtPrecio.getText()));
         
+        ArticulosOADJPAImpl aOAD = new ArticulosOADJPAImpl();
+        aOAD.editarArticulo(articuloPorEditar);
+        setMode("add");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        int selected = tblArticulos.getSelectedRow();
+        if( selected == -1 ){
+            JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila.");
+        }else{      
+            Articulos articulo = articulosList.get( selected );
+            ArticulosOADJPAImpl aOAD = new ArticulosOADJPAImpl();
+            aOAD.eliminarArticulo( articulo.getIdArticulo()  );
+            updTable();
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
+    
+    Articulos articuloPorEditar ;
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         int selected = tblArticulos.getSelectedRow();
@@ -596,6 +635,7 @@ public class PanelPos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debes de seleccionar una fila.");
         }else{      
             setMode( "upd" );
+            articuloPorEditar = articulosList.get( selected );
             showInfo( articulosList.get( selected ) );
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -639,6 +679,7 @@ public class PanelPos extends javax.swing.JFrame {
          
     }//GEN-LAST:event_txtFiltroKeyTyped
 
+    
     private void agregarAVentas( int index){
         // TODO add your handling code here:
         //System.out.println( tblArticulosVenta.getModel().getRowCount() );
@@ -655,13 +696,20 @@ public class PanelPos extends javax.swing.JFrame {
         }
     }
     
+    private double total = 0 ;
     private void agregarArticuloAVenta( Articulos articulo ){
+        
         DefaultTableModel temp = (DefaultTableModel) tblVenta.getModel();
         Object nuevo[]= { articulo.getIdArticulo(), articulo.getNombre(), articulo.getDescripcion(), articulo.getPrecio(), txtCantidad.getText() };
         temp.addRow(nuevo);
+        
+        total += articulo.getPrecio() * Double.parseDouble( txtCantidad.getText() );
+        txtTotal.setText( Double.toString( total ) );
+        
         txtFiltro.setText("");
         txtCantidad.setText( Integer.toString( 1 ) );
         
+        //Para simular el que vuelva a filtrar por vacio y reestaure el grid de articulos disponibles
         TableModel model = tblArticulosVenta.getModel();
             TableRowSorter sorter = new TableRowSorter<TableModel>(model);
 
@@ -676,8 +724,7 @@ public class PanelPos extends javax.swing.JFrame {
             }
             sorter.setRowFilter(rf);
             tblArticulosVenta.changeSelection(0, 0, false, false);
-        
-        
+            
         txtFiltro.requestFocus();
     }
     
@@ -716,6 +763,50 @@ public class PanelPos extends javax.swing.JFrame {
             agregarAVentas( 0 );
         }else{  }
     }//GEN-LAST:event_txtCantidadKeyReleased
+
+    private void btnFinalizarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarVentaActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel temp = (DefaultTableModel) tblVenta.getModel();
+        ArticulosOADJPAImpl aOAD = new ArticulosOADJPAImpl();
+        ComprasOADJPAImpl cOAD = new ComprasOADJPAImpl();
+        ComprasArticulosOADJPAImpl caOAD = new ComprasArticulosOADJPAImpl();
+        //Hay que guardar todo
+        //Formamos atributos para la compra
+        Compras compra = new Compras();
+        double monto_total = total;
+        Date fecha = new Date();
+        
+        compra.setFecha(fecha);
+        compra.setIdCliente( (Cliente) cmbCliente.getItemAt( cmbCliente.getSelectedIndex() ) );
+        compra.setMontoTotal( BigDecimal.valueOf( monto_total ) ) ;
+        cOAD.agregarCompra(compra);
+        
+        //Barremos todo el grid
+        for( int x = 0; x < temp.getRowCount() ; x++ ){
+            int id_articulo = Integer.parseInt( temp.getValueAt(x, 0).toString() );
+            int cantidad = Integer.parseInt( temp.getValueAt(x, 4).toString() );
+            double precio_compra = cantidad * Double.valueOf( temp.getValueAt(x , 3).toString() );
+            
+            Articulos arti = aOAD.consultarArticulo(id_articulo);
+            
+            ComprasArticulos carti = new ComprasArticulos();
+            carti.setCantidad(cantidad);
+            carti.setIdArticulo(arti);
+            carti.setIdCompra(compra);
+            carti.setPrecioCompra(BigDecimal.valueOf(precio_compra));
+            caOAD.agregarComprasArticulos(carti);
+        }
+        
+        
+        
+        JOptionPane.showMessageDialog(null, "El monto a pagar es de : $  " + total );
+        
+        //Limpiamos todo
+        total = 0;
+        txtTotal.setText( "0" );
+        
+        temp.setRowCount(0 );
+    }//GEN-LAST:event_btnFinalizarVentaActionPerformed
 
     
     public void setMode( String mode ){
@@ -798,6 +889,7 @@ public class PanelPos extends javax.swing.JFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnFinalizarVenta;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private java.util.List<pos.Cliente> clienteList;
@@ -808,7 +900,7 @@ public class PanelPos extends javax.swing.JFrame {
     private javax.persistence.Query clienteQuery1;
     private javax.persistence.Query clienteQuery2;
     private javax.persistence.Query clienteQuery3;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox cmbCliente;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JFrame jFrame3;
@@ -845,6 +937,7 @@ public class PanelPos extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdArticulo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtTotal;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

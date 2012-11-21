@@ -55,11 +55,28 @@ public class ArticulosOADJPAImpl implements ArticulosOAD {
     
    
     @Override
-    public void editarArticulo(Articulos articulos){}
+    public void editarArticulo(Articulos articulo){
+        EntityManager em = this.emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            em.merge(articulo);
+            et.commit();
+        }catch(Exception ex){
+            et.rollback();
+        }
+    }
     
     
     @Override
-    public void eliminarArticulo(int idsArticulos){
+    public void eliminarArticulo(int idArticulo){
+        EntityManager em = this.emf.createEntityManager();
+        em.getTransaction().begin();
+        
+            Articulos arti = em.find(Articulos.class, idArticulo);
+            em.remove(arti);
+            em.getTransaction().commit();
+            em.close();
          
     }
 }
